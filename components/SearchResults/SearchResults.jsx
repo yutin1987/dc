@@ -8,7 +8,7 @@ import NoResults from '../NoResults';
 import Loader from '../Loader';
 import styles from './SearchResults.module.scss';
 
-const octokit = new Octokit({ auth: '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' });
+const octokit = new Octokit({ auth: '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' });
 
 const getKey = (keyword) => (pageIndex, previousPageData) => {
   if (previousPageData && previousPageData.length < 30) return null;
@@ -61,8 +61,11 @@ export default function SearchResults({ keyword }) {
           </a>
         ))}
       </div>
-      {error && <div className={styles.error}>{error}</div>}
-      {items.length < 1 && isValidating === false && <NoResults />}
+      {error ? (
+        <div className={styles.error}>{error.message}</div>
+      ) : (
+        items.length < 1 && isValidating === false && !error && <NoResults />
+      )}
       <div className={styles.loader}>
         {isValidating && <Loader />}
       </div>
