@@ -28,7 +28,7 @@ export default function SearchResults({ keyword }) {
     if (isValidating === true) return;
     const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
     if (bottom) setSize(size + 1);
-  }, 1000, { maxWait: 2000 }), [size, isValidating]);
+  }, 1000), [size, isValidating]);
 
   const items = React.useMemo(() => {
     const results = [];
