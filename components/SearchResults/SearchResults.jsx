@@ -1,14 +1,12 @@
 import map from 'lodash/map';
 import debounce from 'lodash/debounce';
+import axios from 'axios';
 import React from 'react';
 import PropTypes from 'prop-types';
 import useSWRInfinite from 'swr/infinite';
-import { Octokit } from '@octokit/core';
 import NoResults from '../NoResults';
 import Loader from '../Loader';
 import styles from './SearchResults.module.scss';
-
-const octokit = new Octokit({ auth: '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' });
 
 const getKey = (keyword) => (pageIndex, previousPageData) => {
   if (previousPageData && previousPageData.length < 30) return null;
@@ -16,7 +14,7 @@ const getKey = (keyword) => (pageIndex, previousPageData) => {
 };
 
 async function fetcher(key) {
-  const result = await octokit.request(`GET /search/repositories?${key}`);
+  const result = await axios.get(`/api/repositories?${key}`);
   return result.data.items;
 }
 
