@@ -1,0 +1,9 @@
+.loader{
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  svg path,
+  svg rect{
+    fill: #FF6700;
+  }
+}
